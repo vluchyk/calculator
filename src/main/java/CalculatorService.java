@@ -8,26 +8,26 @@ public class CalculatorService {
     }
 
     public Calculator multiplication(double value, double multiplier) {
-        return new Calculator(value, multiplier, "*", value * multiplier);
+        return new Calculator(value, multiplier, "x", value * multiplier);
     }
 
-    public Calculator division(double value, double divider) throws IllegalArgumentException {
+    public Calculator division(double value, double divider) throws CalculatorException {
         if (divider == 0) {
-            throw new IllegalArgumentException();
+            throw new CalculatorException("Division by zero.");
         }
         return new Calculator(value, divider, "/", value / divider);
     }
 
-    public Calculator calculate(double first, double second, String action) throws IllegalArgumentException{
+    public Calculator calculate(double first, double second, String action) throws CalculatorException {
         if ("+".equals(action))
             return addition(first, second);
         else if ("-".equals(action))
             return subtraction(first, second);
-        else if ("*".equals(action))
+        else if ("x".equals(action))
             return multiplication(first, second);
         else if ("/".equals(action))
             return division(first, second);
         else
-            throw new IllegalArgumentException();
+            throw new CalculatorException("Unknown action.");
     }
 }
